@@ -111,6 +111,13 @@ func (s *DBStore) Update(id int, attributes map[string]string) error {
 	return errors.New("record not found")
 }
 
+// GetAllRecords retrieves all records
+func (s *DBStore) GetAllRecords() []Record {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	return s.data
+}
+
 func main() {
 	store := DBNewStore("mdb.json")
 	r := gin.Default()
@@ -172,6 +179,11 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"message": "Deleted", "id": id})
 	})
 
+	r.GET("/all", func(c *gin.Context) {
+		records := store.GetAllRecords()
+		c.JSON(http.StatusOK, records)
+	})
+
 	fmt.Println("Server running on http://localhost:8080")
-	r.Run(":8080")
+	r.Run(":8081")
 }
