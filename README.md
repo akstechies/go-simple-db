@@ -47,7 +47,7 @@ The server will start at **`http://localhost:8080`** 🚀
 | `POST` | `/insert`           | Insert a new record   |
 | `PUT`  | `/update/:id`       | Update a record by ID |
 | `GET`  | `/get/:id`          | Retrieve a record     |
-| `GET`  | `/all`              | Get all records       |
+| `GET`  | `/delete/:id`       | Delete a record       |
 
 ---
 
